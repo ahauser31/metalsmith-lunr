@@ -29,7 +29,7 @@ var lunr = require('metalsmith-lunr');
 metalsmith.use(lunr()).
 ```
 
-Use file metadata as `fields` for the search and assign weight for each field. The `content` field refers Metalsmith's internal record of the files contents and should not be included in the file metadata.
+Use file metadata as `fields` for the search and assign weight for each field. The `contents` field refers Metalsmith's internal record of the files contents and will automatically be created from the file contents. Do not include the field `contents` manually.
 
 ```js
 var lunr = require('metalsmith-lunr');
@@ -59,16 +59,18 @@ metalsmith.use(lunr({
 #### Optional Parameters
 
 - `fields`: {`metadata search field`: `search weight`}
-- `ref`: `metadata search reference for document`
-- `indexPath`: `path for JSON index file`
-- `pipelineFunctions`: [`lunr pipeline functions`] Functions will be called in order by lunr, see [lunr doc](http://lunrjs.com/docs/#Pipeline) for more information.
+- `ref`: `metadata search reference for document (link to source)`
+- `indexPath`: `path for JSON index file (output file)`
+- `pipelineFunctions`: [`lunr pipeline functions`] Functions will be called in order by lunr, see [lunr doc](http://lunrjs.com/docs/#Pipeline) for more information. Luna default pipleine is run if not specified.
 - `preprocess`: a callback function that can pre-process the content of each file before it is indexed. (For example stripping HTML tags). This will not affect the content of the files themselves. The callback is passed the content as a string to it's first argument. The metadata (including the raw content buffer) can be access with `this`. The callback **must return** a string.
+- `stripHtml`: `Boolean value that specifies if HTML tags should be removed from fields that go into the index`
 
 #### Default Parameter Values
 
   - `fields`: {`contents`: `1`}
   - `ref`: `filePath`
   - `indexPath`: `searchIndex.json`
+  - `stripHtml`: true
 
  
 ##Client Side Search
