@@ -9,7 +9,7 @@
   "author": "CMClay",
   "license": "MIT",
   "dependencies": {
-    "lunr": "^0.5.4",
+    "lunr": "^0.7.2",
     "sanitize-html": "^1.13.0"
   },
   "devDependencies": {
